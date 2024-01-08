@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}#geocode{font-size: 120%;}</style>
+    <style>
+        body{
+    width: 1280px;
+    background-color: rgb(243, 245, 247);
+    background-image:
+      linear-gradient(rgba(235, 231, 212, 0.5) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(192, 250, 225, 0.5) 2px, transparent 2px),
+      linear-gradient(rgba(235,231,212,.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192,250,225,.28) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    background-color:white;
+    vertical-align: middle;
+    margin: auto;
+}
+
+h1{
+    font-size: 36px;
+    font-weight: bold;
+    margin: 15px;
+}
+
+#myMap{
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+input{
+    width: 300px;
+    height: 50px;
+    margin: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+label{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+button{
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#geocode{
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table{
+    margin: auto;
+}
+
+.p1-btn{
+    display: flex;
+}
+
+button{
+    width: 200px;
+    height: 50px;
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(241, 212, 44);
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px #aeacac;
+    cursor: pointer;
+    border: 0;
+}
+    </style>
+</head>
+<body>
+    <!-- MAP[START] -->
+<h1>①地図をクリックして住所を表示しよう</h1>
+<hr>
+
+<div id="myMap" style='width:70%;height:50%;'></div>
+<div id="geocode">ReverseGeocode:data</div>
+
+<hr>
+<h1>②住所から”都道府県＋市町村名（東京は区まで）をコピーしよう</h1>
+<h1>③下の入力フォームにペーストしよう</h1>
+<table class="p1t">
+    <tr>
+        <td><label>【1P】:都道府県＋市町村名</label></td>
+        <td><input type="text" id="pcity-chl"></td>
+    </tr>
+    <tr>
+        <td><label>【COM】:都道府県＋市町村名</label></td>
+        <td><input type="text" id="ccity-chl"></td>
+    </tr>
+</table>
+<hr>
+<div class="p1-btn">
+    <button id="citysel">登録</button>
+</div>
+
+
+
+
+<!-- MAP[END] -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+    src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key="
+    async defer></script>
+<script src="https://cdn.jsdelivr.net/gh/yamazakidaisuke/BmapQuery/js/BmapQuery.js"></script>
+
+<script>
+//****************************************************************************************
+// BingMaps&BmapQuery
+//****************************************************************************************
+//Init
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+    
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //   startMap(lat, lon, "MapType", Zoom[1~20]);
+    //   MapType:[load, aerial,canvasDark,canvasLight,birdseye,grayscale,streetside]
+    //--------------------------------------------------
+    map.startMap(35.681236, 139.767125, "load", 5);
+
+    //----------------------------------------------------
+    //3. Get ReverseGeocode(2 patterns)
+    //   reverseGeocode(location,callback);
+    //----------------------------------------------------
+    
+    //A. Set location data for BingMaps
+    const location   = map.setLocation(35.681236, 139.765135);
+    //const location = map.getCenter(); //MapCenter
+    map.reverseGeocode(location, function(data){
+        console.log(data);
+        document.querySelector("#geocode").innerHTML=data;
+    });
+    
+    //B. Get ReverseGeocode of click location
+    map.onGeocode("click", function(clickPoint){
+        map.reverseGeocode(clickPoint.location, function(data){
+            console.log(data);
+            document.querySelector("#geocode").innerHTML=data;
+        });
+    });
+    
+}
+
+//入力値を子ウィンドウ→親ウィンドウに送信＋閉じる
+$("#citysel").on("click",function(){
+    window.opener.document.getElementById("p3-pcity").innerHTML = document.getElementById("pcity-chl").value;
+    window.opener.document.getElementById("p3-ccity").innerHTML = document.getElementById("ccity-chl").value;
+    open('about:blank', '_self').close();    //一度再表示してからClose
+})
+
+
+</script>   
+</body>
+</html>

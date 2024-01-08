@@ -1,0 +1,170 @@
+body{
+    width: 1280px;
+    background-color: rgb(243, 245, 247);
+    background-image:
+      linear-gradient(rgba(235, 231, 212, 0.5) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(192, 250, 225, 0.5) 2px, transparent 2px),
+      linear-gradient(rgba(235,231,212,.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192,250,225,.28) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    background-color:white;
+    vertical-align: middle;
+    margin: auto;
+}
+
+.p2-hr{
+    font-size: 32px;
+}
+
+header{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+p{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.p2-title{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.p2-midashi{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 0 auto;
+    border-bottom: 1px solid;
+}
+
+.p2-thyoji{
+    width: 100px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p2-cityhyoji{
+    width: 100px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.p2-maps{
+    display: flex;
+    justify-content: center;
+}
+
+.p2-map{
+    margin: 5px 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.p2-jk{
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    width: 90%;
+    height: 600px;
+    margin: auto;
+    border: 0px solid gray;
+    table-layout: fixed;
+}
+
+td:nth-child(1){
+    width: 50%;
+    height: 150px;
+}
+
+td:nth-child(2){
+    width: 50%;
+    height: 150px;
+    vertical-align: middle;
+}
+
+#p2-php,#p2-pgu,#p2-pcho,#p2-ppa,#p2-chp,#p2-cgu,#p2-ccho,#p2-cpa{
+    font-size: 56px;
+    font-weight: bold;
+    text-align: center;
+}
+
+img{
+    width: 100%;
+    margin:10px;
+}
+
+.pgcp{
+    box-shadow: 4px 4px 4px 4px #c9b925;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button{
+    padding: 0px;
+    margin: 0px;
+    background-color:transparent;
+    border: 0;
+    border-radius: 12px;
+}
+
+
+.omake{
+    display: flex;
+    justify-content: center;
+}
+
+.oma1{
+    margin: 0 20px;
+    color: gray;
+}
+
+.oma2{
+    font-size: 32px;
+    text-align: center;
+}
+
+.oma3{
+    display: flex;
+    justify-content: center;
+}
+
+#p2close{
+    width: 200px;
+    height: 50px;
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(241, 212, 44);
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px #aeacac;
+    cursor: pointer;
+}
+
+.wincity{
+    font-size: 36px;
+    font-weight: bold;
+    color: rgb(243, 97, 97);
+}
+
+#p2close:hover{
+    background-color: #aeacac;
+    color:white;
+}

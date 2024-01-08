@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市町村対抗 じゃんけんバトル</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style3.css">
+</head>
+
+<body>
+    <header>
+        <h1>🇯🇵市町村対抗 じゃんけんバトル✊✌️🖐</h1>
+        <button id="addjump">市町村選択</button>
+        <button id="explanation">各項目の説明はこちら</button>
+    </header>
+
+    <hr>
+
+    <div class="p3-main">
+        <div class="p3-title">
+            <div class="p3-midashi">
+                <p class="p3-hr">1P : <span id="p3-pcity"></span></p>
+            </div>
+            <div class="p3-midashi">
+                <p class="p3-hr">COM : <span id="p3-ccity"></span></p>
+            </div>
+        </div>
+
+        <div class="p3-maps">
+            <div id="p3-pmap" class="p3-map" style="width:50%;height:300px;float:none;border:1px solid #aeacac;"></div>
+            <div id="p3-cmap" class="p3-map" style="width:50%;height:300px;float:none;border:1px solid #aeacac;"></div>
+        </div>
+        <hr>
+        <table class="p3-t1">
+            <!-- HP 1行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-parea-s" class="pslider" min="0" max="2177.61" value="0">
+                </td>
+                <td>
+                    <p><span id="p3-parea-v"></span>k㎡</p>
+                </td>
+                <td>面積<br>（2023年）</td>
+                <td>
+                    <p><span id="p3-carea-v"></span>k㎡</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-carea-s" min="0" max="2177.61" value="0">
+                </td>
+            </tr>
+        </table>
+        <table class="p3-t2">
+            <!-- グー 1行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-ppop-s" class="pslider" min="0" max="1500000">
+                </td>
+                <td>
+                    <p><span id="p3-ppop-v"></span>人</p>
+                    <p><span id="p3-ppop-r"></span>位/1741位</p>
+                </td>
+                <td>総人口<br>（2023年）</td>
+                <td>
+                    <p><span id="p3-cpop-v"></span>人</p>
+                    <p><span id="p3-cpop-r"></span>位/1741位</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cpop-s" min="0" max="1500000">
+                </td>
+            </tr>
+            <!-- グー 2行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-pemp1-s" class="pslider" min="0" max="100">
+                </td>
+                <td>
+                    <p><span id="p3-pemp1-v"></span>％</p>
+                </td>
+                <td>一次産業割合<br>（2020年）</td>
+                <td>
+                    <p><span id="p3-cemp1-v"></span>％</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cemp1-s" min="0" max="100">
+                </td>
+            </tr>
+            <!-- グー 3行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-pemp2-s" class="pslider" min="0" max="100">
+                </td>
+                <td>
+                    <p><span id="p3-pemp2-v"></span>％</p>
+                </td>
+                <td>二次産業割合<br>（2020年）</td>
+                <td>
+                    <p><span id="p3-cemp2-v"></span>％</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cemp2-s" min="0" max="100">
+                </td>
+            </tr>
+            <!-- グー 4行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-pemp3-s" class="pslider" min="0" max="100">
+                </td>
+                <td>
+                    <p><span id="p3-pemp3-v"></span>％</p>
+                </td>
+                <td>三次産業割合<br>（2020年）</td>
+                <td>
+                    <p><span id="p3-cemp3-v"></span>％</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cemp3-s" min="0" max="100">
+                </td>
+            </tr>
+        </table>
+        <table class="p3-t3">
+            <!-- チョキ 1行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-ptiarea-s" class="pslider" min="0" max="100">
+                </td>
+                <td>
+                    <p><span id="p3-ptiarea-v"></span>％</p>
+                    <p><span id="p3-ptiarea-r"></span>位/1741位</p>
+                </td>
+                <td>非可住地面積率<br>（2021年）</td>
+                <td>
+                    <p><span id="p3-ctiarea-v"></span>％</p>
+                    <p><span id="p3-ctiarea-r"></span>位/1741位</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-ctiarea-s" min="0" max="100">
+                </td>
+            </tr>
+        </table>
+
+        <table class="p3-t4">
+            <!-- パー 1行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-prank-s" class="pslider" min="0" max="1741">
+                </td>
+                <td>
+                    <p><span id="p3-prank-r"></span>位/1741位</p>
+                </td>
+                <td>全国自治体経営力<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-crank-r"></span>位/1741位</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-crank-s" min="0" max="1741">
+                </td>
+            </tr>
+            <!-- パー 2行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-ppopr-s" class="pslider" min="-15" max="7.42">
+                </td>
+                <td>
+                    <p><span id="p3-ppopr-v"></span>％</p>
+                </td>
+                <td>人口増減率<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-cpopr-v"></span>％</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cpopr-s" min="-15" max="7.42">
+                </td>
+            </tr>
+            <!-- パー 3行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-pltr-s" class="pslider" min="-50" max="60.98">
+                </td>
+                <td>
+                    <p><span id="p3-pltr-v"></span>％</p>
+                </td>
+                <td>地方税収入増減率<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-cltr-v"></span>％</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cltr-s" min="-50" max="60.98">
+                </td>
+            </tr>
+            <!-- パー 4行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-plt-s" class="pslider" min="0" max="1458123">
+                </td>
+                <td>
+                    <p><span id="p3-plt-v"></span>円</p>
+                </td>
+                <td>人口１名あたりの<br>地方税収<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-clt-v"></span>円</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-clt-s" min="0" max="1458123">
+                </td>
+            </tr>
+            <!-- パー 5行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-psav-s" class="pslider" min="-4000000" max="10706752">
+                </td>
+                <td>
+                    <p><span id="p3-psav-v"></span>円</p>
+                </td>
+                <td>人口１名あたりの<br>純貯蓄額<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-csav-v"></span>円</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-csav-s" min="-4000000" max="10706752">
+                </td>
+            </tr>
+            <!-- パー 6行目 -->
+            <tr>
+                <td>
+                    <input type="range" id="p3-pstaff-s" class="pslider" min="0" max="1078121">
+                </td>
+                <td>
+                    <p><span id="p3-pstaff-v"></span>円</p>
+                </td>
+                <td>人口１名あたりの<br>職員人件費<br>（2022年）</td>
+                <td>
+                    <p><span id="p3-cstaff-v"></span>円</p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cstaff-s" min="0" max="1078121">
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <p class="p3-hr">↓↓↓戦闘力↓↓↓</p>
+        <hr>
+        <table class="p3-t5">
+            <tr>
+                <td>
+                    <input type="range" id="p3-php-s" class="pslider" min="0" max="3500">
+                </td>
+                <td>
+                    <p id="p3-php"></p>
+                </td>
+                <td><img src="./imgs/HP01.png" alt=""></td>
+                <td>
+                    <p id="p3-chp"></p>
+                </td>
+                <td>
+                    <input type="range" id="p3-chp-s" min="0" max="3500">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="range" id="p3-pgu-s" class="pslider" min="0" max="1200">
+                </td>
+                <td>
+                    <p id="p3-pgu"></p>
+                </td>
+                <td><img src="./imgs/gu02.png" alt=""></td>
+                <td>
+                    <p id="p3-cgu"></p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cgu-s" min="0" max="1200">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="range" id="p3-pcho-s" class="pslider" min="0" max="1200">
+                </td>
+                <td>
+                    <p id="p3-pcho"></p>
+                </td>
+                <td><img src="./imgs/cho02.png" alt=""></td>
+                <td>
+                    <p id="p3-ccho"></p>
+                </td>
+                <td>
+                    <input type="range" id="p3-ccho-s" min="0" max="1200">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="range" id="p3-ppa-s" class="pslider" min="0" max="1200">
+                </td>
+                <td>
+                    <p id="p3-ppa"></p>
+                </td>
+                <td><img src="./imgs/pa02.png" alt=""></td>
+                <td>
+                    <p id="p3-cpa"></p>
+                </td>
+                <td>
+                    <input type="range" id="p3-cpa-s" min="0" max="1200">
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <div id="p3-btn">
+            <span class="p3-btnp">バトルスタート</span>
+        </div>
+
+    </div>
+
+    <!-- JQuery & BingMap & Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+        src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key="
+        async defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/yamazakidaisuke/BmapQuery/js/BmapQuery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!--  JQuery & BingMap & Ajax -->
+
+
+
+    <script>
+        //読み込み前の地図表示 
+        function GetMap() {
+            //------------------------------------------------------------------------
+            //1. Instance
+            //------------------------------------------------------------------------
+            const pmap = new Bmap("#p3-pmap");
+            const cmap = new Bmap("#p3-cmap");
+            //------------------------------------------------------------------------
+            //2. Display Map
+            //------------------------------------------------------------------------
+            pmap.startMap(34.6913, 135.183, "load", 9); //The place is Bellevue.
+            cmap.startMap(34.6913, 135.183, "load", 9); //The place is Bellevue.
+        }
+
+        //spanの値変更を監視して実行
+        let targetNode = document.getElementById('p3-pcity');
+        let mo = new MutationObserver(function () {
+
+        //設定値から変数を取得
+        let pcity = document.getElementById("p3-pcity").textContent;
+        let ccity = document.getElementById("p3-ccity").textContent;
+        console.log(pcity);
+        console.log(ccity);
+
+        //地図データを検索して取得
+        const pmap = new Bmap("#p3-pmap");
+        const cmap = new Bmap("#p3-cmap");
+
+        pmap.startMap(34.6913, 175.183, "load", 9); //The place is Bellevue.
+        cmap.startMap(34.6913, 175.183, "load", 9); //The place is Bellevue.
+
+        //3.SpatialDataService:get Boundary
+        pmap.getBoundary("type");
+        cmap.getBoundary("type");
+
+        pmap.getSearchBoundary(pcity, "PopulatedPlace");
+        cmap.getSearchBoundary(ccity, "PopulatedPlace");
+
+        //JSON読み込み
+        axios.get('./data/citydata.json').then(function (response) {
+            const citys = response.data
+            //1P データセット
+            console.log(response.data);
+            //面積
+            const ptarea = response.data.filter(x => x.city == pcity).map(x => x["t-area2023"])[0] ?? null;
+            $("#p3-parea-v").text(ptarea);
+            $("#p3-parea-s").val(ptarea);
+            const ctarea = response.data.filter(x => x.city == ccity).map(x => x["t-area2023"])[0] ?? null;
+            $("#p3-carea-v").text(ctarea);
+            $("#p3-carea-s").val(ctarea);
+            //総人口
+            const ppop = response.data.filter(x => x.city == pcity).map(x => x["pop2023"])[0] ?? null;
+            $("#p3-ppop-v").text(ppop);
+            $("#p3-ppop-s").val(ppop);
+            const ppopr = response.data.filter(x => x.city == pcity).map(x => x["p-rank"])[0] ?? null;
+            $("#p3-ppop-r").text(ppopr);
+            const cpop = response.data.filter(x => x.city == ccity).map(x => x["pop2023"])[0] ?? null;
+            $("#p3-cpop-v").text(cpop);
+            $("#p3-cpop-s").val(cpop);
+            const cpopr = response.data.filter(x => x.city == ccity).map(x => x["p-rank"])[0] ?? null;
+            $("#p3-cpop-r").text(cpopr);
+            //一次産業
+            const pemp1 = response.data.filter(x => x.city == pcity).map(x => x["emp1-r2020"])[0] ?? null;
+            $("#p3-pemp1-v").text(pemp1);
+            $("#p3-pemp1-s").val(pemp1);
+            const cemp1 = response.data.filter(x => x.city == ccity).map(x => x["emp1-r2020"])[0] ?? null;
+            $("#p3-cemp1-v").text(cemp1);
+            $("#p3-cemp1-s").val(cemp1);
+            //二次産業
+            const pemp2 = response.data.filter(x => x.city == pcity).map(x => x["emp2-r2020"])[0] ?? null;
+            $("#p3-pemp2-v").text(pemp2);
+            $("#p3-pemp2-s").val(pemp2);
+            const cemp2 = response.data.filter(x => x.city == ccity).map(x => x["emp2-r2020"])[0] ?? null;
+            $("#p3-cemp2-v").text(cemp2);
+            $("#p3-cemp2-s").val(cemp2);
+            //三次産業
+            const pemp3 = response.data.filter(x => x.city == pcity).map(x => x["emp3-r2020"])[0] ?? null;
+            $("#p3-pemp3-v").text(pemp3);
+            $("#p3-pemp3-s").val(pemp3);
+            const cemp3 = response.data.filter(x => x.city == ccity).map(x => x["emp3-r2020"])[0] ?? null;
+            $("#p3-cemp3-v").text(cemp3);
+            $("#p3-cemp3-s").val(cemp3);
+            //非可住地面積率
+            const pinharear = response.data.filter(x => x.city == pcity).map(x => x["i-rank"])[0] ?? null;
+            $("#p3-ptiarea-r").text(pinharear);
+            //小数第二位まで四捨五入
+            let pinharea = 100 - response.data.filter(x => x.city == pcity).map(x => x["ti-area-r2321"])[0] ?? null;
+            pinharea = pinharea * 100;
+            pinharea = Math.round(pinharea);
+            pinharea = pinharea / 100;
+            $("#p3-ptiarea-v").text(pinharea);
+            $("#p3-ptiarea-s").val(pinharea);
+            const cinharear = response.data.filter(x => x.city == ccity).map(x => x["i-rank"])[0] ?? null;
+            $("#p3-ctiarea-r").text(cinharear);
+            let cinharea = 100 - response.data.filter(x => x.city == ccity).map(x => x["ti-area-r2321"])[0] ?? null;
+            //小数第二位まで四捨五入
+            cinharea = cinharea * 100;
+            cinharea = Math.round(cinharea);
+            cinharea = cinharea / 100;
+            $("#p3-ctiarea-v").text(cinharea);
+            $("#p3-ctiarea-s").val(cinharea);
+            //自治体経営力ランキング
+            const pctvrank = response.data.filter(x => x.city == pcity).map(x => x["ctv-rank2023"])[0] ?? null;
+            $("#p3-prank-r").text(pctvrank);
+            $("#p3-prank-s").val(1741 - pctvrank);
+            const cctvrank = response.data.filter(x => x.city == ccity).map(x => x["ctv-rank2023"])[0] ?? null;
+            $("#p3-crank-r").text(cctvrank);
+            $("#p3-crank-s").val(1741 - cctvrank);
+            //人口増減率
+            const pctvpopr = response.data.filter(x => x.city == pcity).map(x => x["ctv-pop-r2023"])[0] ?? null;
+            $("#p3-ppopr-v").text(pctvpopr);
+            $("#p3-ppopr-s").val(pctvpopr);
+            const cctvpopr = response.data.filter(x => x.city == ccity).map(x => x["ctv-pop-r2023"])[0] ?? null;
+            $("#p3-cpopr-v").text(cctvpopr);
+            $("#p3-cpopr-s").val(cctvpopr);
+            //地方税収入増減率
+            const pctvltr = response.data.filter(x => x.city == pcity).map(x => x["ctv-ltax-r2023"])[0] ?? null;
+            $("#p3-pltr-v").text(pctvltr);
+            $("#p3-pltr-s").val(pctvltr);
+            const cctvltr = response.data.filter(x => x.city == ccity).map(x => x["ctv-ltax-r2023"])[0] ?? null;
+            $("#p3-cltr-v").text(cctvltr);
+            $("#p3-cltr-s").val(cctvltr);
+            //人口１名あたりの地方税収入
+            const pctvlt = response.data.filter(x => x.city == pcity).map(x => x["ctv-ltax2023"])[0] ?? null;
+            $("#p3-plt-v").text(pctvlt);
+            $("#p3-plt-s").val(pctvlt);
+            const cctvlt = response.data.filter(x => x.city == ccity).map(x => x["ctv-ltax2023"])[0] ?? null;
+            $("#p3-clt-v").text(cctvlt);
+            $("#p3-clt-s").val(cctvlt);
+            //人口１名あたりの純貯蓄額
+            const pctvsav = response.data.filter(x => x.city == pcity).map(x => x["ctv-saving2023"])[0] ?? null;
+            $("#p3-psav-v").text(pctvsav);
+            $("#p3-psav-s").val(pctvsav);
+            const cctvsav = response.data.filter(x => x.city == ccity).map(x => x["ctv-saving2023"])[0] ?? null;
+            $("#p3-csav-v").text(cctvsav);
+            $("#p3-csav-s").val(cctvsav);
+            //人口１名あたりの職員人件費
+            const pctvsta = response.data.filter(x => x.city == pcity).map(x => x["ctv-staffexp2023"])[0] ?? null;
+            $("#p3-pstaff-v").text(pctvsta);
+            $("#p3-pstaff-s").val(pctvsta);
+            const cctvsta = response.data.filter(x => x.city == ccity).map(x => x["ctv-staffexp2023"])[0] ?? null;
+            $("#p3-cstaff-v").text(cctvsta);
+            $("#p3-cstaff-s").val(cctvsta);
+            //HP
+            const php = response.data.filter(x => x.city == pcity).map(x => x["HP"])[0] ?? null;
+            $("#p3-php").text(php);
+            $("#p3-php-s").val(php);
+            const chp = response.data.filter(x => x.city == ccity).map(x => x["HP"])[0] ?? null;
+            $("#p3-chp").text(chp);
+            $("#p3-chp-s").val(chp);
+            //グー
+            const pgu = response.data.filter(x => x.city == pcity).map(x => x["gu-pwr"])[0] ?? null;
+            $("#p3-pgu").text(pgu);
+            $("#p3-pgu-s").val(pgu);
+            const cgu = response.data.filter(x => x.city == ccity).map(x => x["gu-pwr"])[0] ?? null;
+            $("#p3-cgu").text(cgu);
+            $("#p3-cgu-s").val(cgu);
+            //チョキ
+            const pcho = response.data.filter(x => x.city == pcity).map(x => x["cho-pwr"])[0] ?? null;
+            $("#p3-pcho").text(pcho);
+            $("#p3-pcho-s").val(pcho);
+            const ccho = response.data.filter(x => x.city == ccity).map(x => x["cho-pwr"])[0] ?? null;
+            $("#p3-ccho").text(ccho);
+            $("#p3-ccho-s").val(ccho);
+            //パー
+            const ppa = response.data.filter(x => x.city == pcity).map(x => x["pa-pwr"])[0] ?? null;
+            $("#p3-ppa").text(ppa);
+            $("#p3-ppa-s").val(ppa);
+            const cpa = response.data.filter(x => x.city == ccity).map(x => x["pa-pwr"])[0] ?? null;
+            $("#p3-cpa").text(cpa);
+            $("#p3-cpa-s").val(cpa);
+        })
+        })
+
+        //監視対象の設定
+        let config = {
+            childList: true,//「子ノード（テキストノードも含む）」の変化
+            attributes: true,//「属性」の変化
+            characterData: true,//「テキストノード」の変化
+        }
+
+        //監視の開始
+        mo.observe(targetNode, config);
+
+        //入力フォーム起動
+        $("#addjump").on("click", function () {
+            window.open('form.html',null,'width=1280,height=1280,toolbar=yes,menubar=yes,scrollbars=yes')
+        })
+        //説明ページ起動
+        $("#explanation").on("click", function () {
+            window.open('explanation.html',null,'width=800,height=1400,toolbar=yes,menubar=yes,scrollbars=yes')
+        })
+        //じゃんけんページ起動
+        $("#p3-btn").on("click",function(){
+            let p2window = window.open('janken.html',null,'width=1024,height=1600,toolbar=yes,menubar=yes,scrollbars=yes') 
+        })
+
+    </script>
+
+
+</body>
+
+</html>

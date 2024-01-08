@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市町村対抗じゃんけん 本番</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style2.css">
+</head>
+<body>
+    <header>
+        <h1>🔥市町村対抗じゃんけん 本番🔥</h1>
+    </header>
+    <hr>  
+        <div class="p2-main">
+        <div class="p2-title">
+            <div class="p2-midashi">
+                <p class="p2-hr">1P : <span id="p2-pcity"></span></p>
+            </div>
+            <div class="p2-midashi">
+                <p class="p2-hr">COM : <span id="p2-ccity"></span></p>
+            </div>
+        </div>
+
+        <div class="p2-maps">
+            <div id="p2-pmap" class="p2-map" class="p2mapa" style="width:50%;height:300px;float:none;border:1px solid #aeacac;"></div>
+            <div id="p2-cmap" class="p2-map" class="c2mapa" style="width:50%;height:300px;float:none;border:1px solid #aeacac;"></div>
+        </div>
+        <hr>
+        <div class="p2-jk">
+            <div class="p2-pjkd">
+                <table id="p2-pjkt">
+                    <tr>
+                        <td><img src="./imgs/HP01.png" alt=""></td>
+                        <td><p id="p2-php"></p></td>
+                    </tr>
+                    <tr>
+                        <td><button id="gu_btn"><img src="./imgs/gu02.png" alt="" class="pgcp"></button></td>
+                        <td><p id="p2-pgu"></p></td>
+                    </tr>
+                    <tr>
+                        <td><button id="cho_btn"><img src="./imgs/cho02.png" alt="" class="pgcp"></button></td>
+                        <td><p id="p2-pcho"></p></td>
+                    </tr>
+                    <tr>
+                        <td><button id="par_btn"><img src="./imgs/pa02.png" alt="" class="pgcp"></button></td>
+                        <td><p id="p2-ppa"></p></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="p2-cjkd">
+                <table id="p2-cjkt">
+                    <tr>
+                        <td><img src="./imgs/HP01.png" alt=""></td>
+                        <td><p id="p2-chp"></p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="./imgs/gu02.png" alt=""></td>
+                        <td><p id="p2-cgu"></p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="./imgs/cho02.png" alt=""></td>
+                        <td><p id="p2-ccho"></p></td>
+                    </tr>
+                    <tr>
+                        <td><img src="./imgs/pa02.png" alt=""></td>
+                        <td><p id="p2-cpa"></p></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+        <div class="oma2"><span id="atk">バトルスタート！！</span><span id="def"></span><span id="dam"></span></div>
+        <div class="oma2" id="result"></div>
+        <hr>
+        <div class="omake">
+            <div class="oma1">じゃんけんの回数：<span id="jk_count">0</span>回</div>
+            <div class="oma1">勝った回数：<span id="win_count">0</span>回</div>
+            <div class="oma1">負けた回数：<span id="lose_count">0</span>回</div>
+            <div class="oma1">あいこ回数：<span id="aiko_count">0</span>回</div>
+        </div>
+        <div class="oma3">
+            <button id="p2close">閉じる</button>
+        </div>
+      
+      <footer></footer>
+
+        <!-- JQuery & BingMap & Ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script
+        src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key="
+        async defer></script>
+        <script src="https://cdn.jsdelivr.net/gh/yamazakidaisuke/BmapQuery/js/BmapQuery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!--  JQuery & BingMap & Ajax -->
+      
+      <script>
+        //市町村の変数セット
+        let p2city = document.getElementById("p2-pcity").textContent;
+        let c2city = document.getElementById("p2-ccity").textContent;
+
+        //ステータス用変数セット
+        let p2hp = document.getElementById("p2-php").innerHTML;
+        let p2gu = document.getElementById("p2-pgu").innerHTML;
+        let p2cho = document.getElementById("p2-pcho").innerHTML;
+        let p2pa = document.getElementById("p2-ppa").innerHTML;
+        let c2hp = document.getElementById("p2-chp").innerHTML;
+        let c2gu = document.getElementById("p2-cgu").innerHTML;
+        let c2cho = document.getElementById("p2-ccho").innerHTML;
+        let c2pa = document.getElementById("p2-cpa").innerHTML;
+
+        console.log(p2cho);
+
+        //ウィンドウ起動時に親ウィンドウからデータ受領
+        window.onload = function(){
+            document.getElementById("p2-pcity").innerHTML = window.opener.document.getElementById("p3-pcity").innerHTML;
+            document.getElementById("p2-ccity").innerHTML = window.opener.document.getElementById("p3-ccity").innerHTML;
+            document.getElementById("p2-php").innerHTML = window.opener.document.getElementById("p3-php").innerHTML;
+            document.getElementById("p2-chp").innerHTML = window.opener.document.getElementById("p3-chp").innerHTML;
+            document.getElementById("p2-pgu").innerHTML = window.opener.document.getElementById("p3-pgu").innerHTML;
+            document.getElementById("p2-cgu").innerHTML = window.opener.document.getElementById("p3-cgu").innerHTML;
+            document.getElementById("p2-pcho").innerHTML = window.opener.document.getElementById("p3-pcho").innerHTML;
+            document.getElementById("p2-ccho").innerHTML = window.opener.document.getElementById("p3-ccho").innerHTML;
+            document.getElementById("p2-ppa").innerHTML = window.opener.document.getElementById("p3-ppa").innerHTML;
+            document.getElementById("p2-cpa").innerHTML = window.opener.document.getElementById("p3-cpa").innerHTML;
+        
+            p2city = document.getElementById("p2-pcity").textContent;
+            c2city = document.getElementById("p2-ccity").textContent;
+
+            //地図データを検索して取得
+            const pmap = new Bmap("#p2-pmap");
+            const cmap = new Bmap("#p2-cmap");
+
+            pmap.startMap(34.6913, 175.183, "load", 9); //The place is Bellevue.
+            cmap.startMap(34.6913, 175.183, "load", 9); //The place is Bellevue.
+
+            //3.SpatialDataService:get Boundary
+            pmap.getBoundary("type");
+            cmap.getBoundary("type");
+
+            pmap.getSearchBoundary(p2city, "PopulatedPlace");
+            cmap.getSearchBoundary(c2city, "PopulatedPlace");    
+            
+            
+
+        }
+        
+
+        //読み込み前の地図表示 
+        function GetMap() {
+            //------------------------------------------------------------------------
+            //1. Instance
+            //------------------------------------------------------------------------
+            const pmap = new Bmap("#p2-pmap");
+            const cmap = new Bmap("#p2-cmap");
+            //------------------------------------------------------------------------
+            //2. Display Map
+            //------------------------------------------------------------------------
+            pmap.startMap(34.6913, 135.183, "load", 9); //The place is Bellevue.
+            cmap.startMap(34.6913, 135.183, "load", 9); //The place is Bellevue.
+            //3.SpatialDataService:get Boundary
+            pmap.getBoundary("type");
+            cmap.getBoundary("type");
+            pmap.getSearchBoundary(p2city, "PopulatedPlace");
+            cmap.getSearchBoundary(c2city, "PopulatedPlace");
+         }
+
+        //じゃんけん用変数セット
+        const janken = ["グー","チョキ","パー"]; //じゃんけんのリスト作成
+        let jankenPC = ["グー","チョキ","パー"]; //プレイヤーのじゃんけんの手を定義
+        let jankenNPC = 0; //COMのじゃんけんの手を定義
+        let jkCount = 0; //じゃんけん回数
+        let winCount = 0; //勝った回数
+        let loseCount = 0; //負けた回数
+        let aikoCount = 0; //あいこの回数
+
+        //テーブル色付け用変数セット
+         let p2col;
+        let c2col;
+        let color = 'rgb(245, 209, 82)';
+
+      // グーを選択した場合の処理
+      $("#gu_btn").on("click",function(){
+        p2hp = document.getElementById("p2-php").innerHTML;
+        c2hp = document.getElementById("p2-chp").innerHTML;
+        p2col = 1;
+        jankenPC = "グー";
+        jankenNPC = janken[Math.floor(Math.random()*3)]; //コンピュータの手を決定
+        $("#pc_hands").text(jankenNPC);
+        reset(); //テーブル着色リセット
+        play(); //じゃんけん処理実行
+      })
+      
+      // チョキを選択した場合の処理
+      $("#cho_btn").on("click",function(){
+        p2hp = document.getElementById("p2-php").innerHTML;
+        c2hp = document.getElementById("p2-chp").innerHTML;
+        p2col = 2;
+        jankenPC = "チョキ";
+        jankenNPC = janken[Math.floor(Math.random()*3)];
+        $("#pc_hands").text(jankenNPC);
+        reset();
+        play(); //じゃんけん処理実行
+      })
+      
+      // パーを選択した場合の処理
+      $("#par_btn").on("click",function(){
+        p2hp = document.getElementById("p2-php").innerHTML;
+        c2hp = document.getElementById("p2-chp").innerHTML;
+        p2col = 3;
+        jankenPC = "パー";
+        jankenNPC = janken[Math.floor(Math.random()*3)];
+        $("#pc_hands").text(jankenNPC);
+        reset();
+        play(); //じゃんけん処理実行
+      })
+      
+      function reset(){
+        //テーブル背景、文字色リセット
+        let pdtable = document.getElementById("p2-pjkt").rows;
+        let cdtable = document.getElementById("p2-cjkt").rows;
+        for(let i = 0; i < 4; i++){
+            pdtable[i].style.backgroundColor = "transparent";
+            cdtable[i].style.backgroundColor = "transparent";
+            pdtable[i].style.color = "black";
+            cdtable[i].style.color = "black";
+        }
+      }
+
+
+      function play(jankenPON){
+          // じゃんけん処理
+            //変数の再セット
+            p2hp = document.getElementById("p2-php").innerHTML;
+            p2gu = document.getElementById("p2-pgu").innerHTML;
+            p2cho = document.getElementById("p2-pcho").innerHTML;
+            p2pa = document.getElementById("p2-ppa").innerHTML;
+            c2hp = document.getElementById("p2-chp").innerHTML;
+            c2gu = document.getElementById("p2-cgu").innerHTML;
+            c2cho = document.getElementById("p2-ccho").innerHTML;
+            c2pa = document.getElementById("p2-cpa").innerHTML;
+
+        
+        //COMの選択によるセルの抽出
+        switch(jankenNPC){
+            case "グー":
+             c2col = 1;            
+            break;
+            case "チョキ":
+             c2col = 2;            
+            break;
+            case "パー":
+             c2col = 3;
+            break;
+        }
+
+        if (jankenPC === jankenNPC){ //あいこの時
+          $("#judgment").text("あいこ");
+          aikoCount ++;
+          $("#aiko_count").text(aikoCount);
+        } else if (jankenPC === "グー" && jankenNPC === "チョキ"){
+          $("#judgment").text("勝ち");
+          winCount ++;
+          $("#win_count").text(winCount);
+          calculationPC();
+        } else if (jankenPC === "チョキ" && jankenNPC === "パー"){
+          $("#judgment").text("勝ち");
+          winCount ++;
+          $("#win_count").text(winCount);
+          calculationPC();
+        } else if (jankenPC === "パー" && jankenNPC === "グー"){
+          $("#judgment").text("勝ち");
+          winCount ++;
+          $("#win_count").text(winCount);
+          calculationPC();
+        } else if (jankenPC === "グー" && jankenNPC === "パー"){
+          $("#judgment").text("負け");
+          loseCount ++;
+          $("#lose_count").text(loseCount);
+          calculationNPC();
+        } else if (jankenPC === "チョキ" && jankenNPC === "グー"){
+          $("#judgment").text("負け");
+          loseCount ++;
+          $("#lose_count").text(loseCount);
+          calculationNPC();
+        } else if (jankenPC === "パー" && jankenNPC === "チョキ"){
+          $("#judgment").text("負け");
+          loseCount ++;
+          $("#lose_count").text(loseCount);
+          calculationNPC();
+        } 
+      
+        jkCount ++;
+        $("#jk_count").text(jkCount);
+
+        // 選択した手によってテーブル行を着色
+        let ptable = document.getElementById("p2-pjkt").rows;
+        let ctable = document.getElementById("p2-cjkt").rows;
+        ptable[p2col].style.backgroundColor = color;
+        ctable[c2col].style.backgroundColor = color;
+
+      }
+      
+      function calculationPC(){ //プレイヤー勝ち
+        switch(jankenPC){
+           case "グー":
+             c2hp = c2hp - p2gu;
+             $("#atk").text(p2city + "の攻撃！");
+             $("#def").text(c2city + "に");
+             $("#dam").text(p2gu + "ダメージ！");            
+           break;
+      
+           case "チョキ":
+             c2hp = c2hp - p2cho;
+             $("#atk").text(p2city + "の攻撃！");
+             $("#def").text(c2city + "に");
+             $("#dam").text(p2cho + "ダメージ！");            
+           break;
+      
+           case "パー":
+             c2hp = c2hp - p2pa;
+             $("#atk").text(p2city + "の攻撃！");
+             $("#def").text(c2city + "に");
+             $("#dam").text(p2pa + "ダメージ！");            
+           break;
+        }
+
+         //HP減った数字を青色
+        let ctable = document.getElementById("p2-cjkt").rows;
+        ctable[0].style.color = 'blue'; 
+
+        //残りHPで分岐
+        if(c2hp >= 0){
+            $("#p2-chp").text(c2hp);      
+        } else{
+            c2hp = 0;
+            $("#p2-chp").text(c2hp);
+            let results = '<hr><div>'+ c2city +'はやられてしまった・・・<span class="wincity">勝者：'+ p2city +'！</span></div>';
+            $("#result").append(results);
+        }
+
+      }
+      
+      function calculationNPC(){ //コンピュータ勝ち
+        switch(jankenNPC){
+            case "グー":
+             p2hp = p2hp - c2gu;
+             $("#atk").text(c2city + "の攻撃！");
+             $("#def").text(p2city + "に");
+             $("#dam").text(c2gu + "ダメージ！");            
+            break;
+      
+            case "チョキ":
+             p2hp = p2hp - c2cho;
+             $("#atk").text(c2city + "の攻撃！");
+             $("#def").text(p2city + "に");
+             $("#dam").text(c2cho + "ダメージ！");            
+            break;
+      
+            case "パー":
+             p2hp = p2hp - c2pa;
+             $("#atk").text(c2city + "の攻撃！");
+             $("#def").text(p2city + "に");
+             $("#dam").text(c2pa + "ダメージ！");            
+            break;
+        }
+ 
+        //HP減った数字を青色
+        let ptable = document.getElementById("p2-pjkt").rows;
+        ptable[0].style.color = 'blue';   
+    
+        //残りHPで分岐
+        if(p2hp >= 0){
+            $("#p2-php").text(p2hp);
+        } else{
+            p2hp = 0;
+            $("#p2-php").text(p2hp);
+            let results = '<hr><div>'+ p2city +'はやられてしまった・・・<span class="wincity">勝者：'+ c2city +'！</span></div>';
+            $("#result").append(results);
+        }
+    }
+
+    //閉じるボタン
+    $("#p2close").on("click",function(){
+        open('about:blank', '_self').close();    //一度再表示してからClose
+    })
+
+      </script>
+</body>
+</html>
